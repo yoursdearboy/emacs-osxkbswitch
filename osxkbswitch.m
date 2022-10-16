@@ -33,7 +33,8 @@ Fset_keyboard_layout (emacs_env * env, ptrdiff_t nargs, emacs_value args[],
      return env->make_string (env, "Unknown layout", 14);
   }
 
-  return nil;
+  NSString *s = (__bridge NSString *)(TISGetInputSourceProperty(source, kTISPropertyInputSourceID));
+  return env->make_string (env, [s UTF8String], s.length);
 }
 
 extern
